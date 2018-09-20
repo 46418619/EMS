@@ -1,0 +1,109 @@
+﻿/* For Loading*/
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #3c3c3c;
+    opacity: 0.7;
+    z-index: 3000;
+}
+
+    .overlay i {
+        color: white;
+        font-size: 50px;
+    }
+
+.loading {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    text-align: center;
+}
+
+    .loading > .overlay-container {
+        position: relative;
+        left: -50%;
+    }
+
+        .loading > .overlay-container > p {
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+            max-width: 700px;
+            display: block !important;
+        }
+
+@-webkit-keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+.ui-jqgrid .loading {
+    height: 22px !important;
+}
+
+label.error {
+    color: red;
+    font-size: 12px;
+}
+
+body {
+    font-size: 13px;
+}
+
+.tableDashboard table tbody {
+    display: block;
+    max-height: 370px;
+    overflow-y: scroll;
+}
+
+ .tableDashboard table thead tr, table table tbody tr {
+        display: table;
+        width: 100%;
+    }
+    .tableDashboard table thead tr td {
+        font-weight:bold;
+        font-size:14px;
+    }
+    .tableDashboard table thead tr td,.tableDashboard table tbody tr td  {
+        text-align:center;
+    }
+.menulink {
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 14px;
+    border-right: 3px solid white;
+}
+
+    .menulink a {
+        color: white !important;
+    }
+    .alert-info,.alert-danger,.alert-success {
+    position: fixed;
+    top: 63px;
+    z-index: 1;
+    width: 90%;
+    margin-left: 5%;
+}

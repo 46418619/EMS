@@ -1,0 +1,65 @@
+﻿@model  List<EMS.Models.OutStandingEnquiryViewModel>
+
+@{
+    ViewBag.Title = "Enquiry Dashboard";
+}
+<input type="hidden" value="1" id="EnquiryPage" />
+<h2>EnquiryDashboard</h2>
+</div>
+<table border="1px solid #ccc" style="width:100%" cellpadding="10" class="tableDashboard">
+    <tr>
+        <td style="vertical-align:top;width:50%;height:400px;">
+            <h3>Pending Enquiry</h3>
+            <table id="tblPendingEnquiry" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td style="width:30px;">#</td>
+                        <td style="width:150px;text-align:left;">Name</td>
+                        <td style="width:80px;">In Time</td>
+                        <td style="width:120px;">Status</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int counter = 1;}
+                    @foreach (var item in Model.Where(x => x.Resolved == false))
+                    {
+                        <tr>
+                            <td style="width:30px;" data-id="@item.ID">@Html.Raw(counter++)</td>
+                            <td style="width:150px;text-align:left;">@item.Name</td>
+                            <td style="width:80px;">@item.EntryTime.ToShortTimeString()</td>
+                            <td style="width:120px;"><span style="color:#F16D28"><b><i class="fa fa-clock-o"></i> &nbsp;Pending</b></span></td>
+                            <td><a class="btn btnPending" style="background-color:green !important;line-height: 7px;border-radius: 3px;background: #13a6dd;   color: white !important;"><b><i class="fa fa-check"></i> Resolve</b></a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </td>
+        <td style="vertical-align:top">
+            <h3>Resolved Enquiry</h3>
+            <table id="tblResolvedEnquiry" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td style="width:30px;">#</td>
+                        <td style="width:150px;text-align:left;">Name</td>
+                        <td style="width:120px;">Resolve Time</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ counter = 1;}
+                    @foreach (var item in Model.Where(x => x.Resolved == true))
+                    {
+                        <tr>
+                            <td style="width:30px;" data-id="@item.ID">@Html.Raw(counter++)</td>
+                            <td style="width:150px;text-align:left;">@item.Name</td>
+                            <td style="width:120px;">@item.EntryTime.ToShortTimeString()</td>
+                        <td><span style="color:green"><b><i class="fa fa-check"></i> &nbsp;Resolved</b></span></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
