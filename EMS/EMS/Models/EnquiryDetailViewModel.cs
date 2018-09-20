@@ -17,4 +17,16 @@ namespace EMS.Models
         public string Course { get; set; }
         public string Email { get; set; }
     }
+    public class OutStandingEnquiryViewModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public DateTime EntryTime { get; set; }
+        public DateTime? ResolvedTime { get; set; }
+        public bool Resolved { get; set; }
+        public string Class { get; set; }
+        public string Course { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+    }
 }

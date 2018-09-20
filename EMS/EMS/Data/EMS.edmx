@@ -4,9 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EMS.dbo.EnquiryDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="EMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EnquiryDetails">
           <Key>
             <PropertyRef Name="ID" />
@@ -22,31 +20,20 @@ warning 6002: The table/view 'EMS.dbo.EnquiryDetails' does not have a primary ke
           <Property Name="Email" Type="varchar" MaxLength="200" />
           <Property Name="EntryTime" Type="datetime" />
           <Property Name="ResolvedTime" Type="datetime" />
+          <Property Name="Resolved" Type="bit" />
+          <Property Name="Comment" Type="varchar(max)" />
           <Property Name="Dated" Type="date" />
         </EntityType>
         <EntityContainer Name="EMSModelStoreContainer">
-          <EntitySet Name="EnquiryDetails" EntityType="Self.EnquiryDetails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EnquiryDetails].[ID] AS [ID], 
-    [EnquiryDetails].[FirstName] AS [FirstName], 
-    [EnquiryDetails].[LastName] AS [LastName], 
-    [EnquiryDetails].[DOB] AS [DOB], 
-    [EnquiryDetails].[Mobile] AS [Mobile], 
-    [EnquiryDetails].[Class] AS [Class], 
-    [EnquiryDetails].[Address] AS [Address], 
-    [EnquiryDetails].[Course] AS [Course], 
-    [EnquiryDetails].[Email] AS [Email], 
-    [EnquiryDetails].[EntryTime] AS [EntryTime], 
-    [EnquiryDetails].[ResolvedTime] AS [ResolvedTime], 
-    [EnquiryDetails].[Dated] AS [Dated]
-    FROM [dbo].[EnquiryDetails] AS [EnquiryDetails]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="EnquiryDetails" EntityType="Self.EnquiryDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EnquiryDetails" EntityType="EMSModel.EnquiryDetail" />
+        </EntityContainer>
         <EntityType Name="EnquiryDetail">
           <Key>
             <PropertyRef Name="ID" />
@@ -62,11 +49,10 @@ warning 6002: The table/view 'EMS.dbo.EnquiryDetails' does not have a primary ke
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="EntryTime" Type="DateTime" Precision="3" />
           <Property Name="ResolvedTime" Type="DateTime" Precision="3" />
+          <Property Name="Resolved" Type="Boolean" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Dated" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityContainer Name="EMSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EnquiryDetails" EntityType="Self.EnquiryDetail" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -76,18 +62,20 @@ warning 6002: The table/view 'EMS.dbo.EnquiryDetails' does not have a primary ke
           <EntitySetMapping Name="EnquiryDetails">
             <EntityTypeMapping TypeName="EMSModel.EnquiryDetail">
               <MappingFragment StoreEntitySet="EnquiryDetails">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EntryTime" ColumnName="EntryTime" />
-                <ScalarProperty Name="ResolvedTime" ColumnName="ResolvedTime" />
                 <ScalarProperty Name="Dated" ColumnName="Dated" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+                <ScalarProperty Name="ResolvedTime" ColumnName="ResolvedTime" />
+                <ScalarProperty Name="EntryTime" ColumnName="EntryTime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

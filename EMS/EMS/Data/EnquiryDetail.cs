@@ -25,6 +25,8 @@ namespace EMS.Data
         public string Email { get; set; }
         public Nullable<System.DateTime> EntryTime { get; set; }
         public Nullable<System.DateTime> ResolvedTime { get; set; }
+        public Nullable<bool> Resolved { get; set; }
+        public string Comment { get; set; }
         public Nullable<System.DateTime> Dated { get; set; }
     }
 }

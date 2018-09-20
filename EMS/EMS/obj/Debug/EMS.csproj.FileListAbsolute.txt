@@ -80,3 +80,5 @@ C:\Users\VipulKumar\Documents\Visual Studio 2013\Projects\EMS\EMS\EMS\bin\ko\Sys
 C:\Users\VipulKumar\Documents\Visual Studio 2013\Projects\EMS\EMS\EMS\bin\ru\System.Spatial.resources.dll
 C:\Users\VipulKumar\Documents\Visual Studio 2013\Projects\EMS\EMS\EMS\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\VipulKumar\Documents\Visual Studio 2013\Projects\EMS\EMS\EMS\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\VipulKumar\Documents\Visual Studio 2013\Projects\EMS\EMS\EMS\bin\itextsharp.dll
+C:\Users\VipulKumar\Documents\Visual Studio 2013\Projects\EMS\EMS\EMS\bin\itextsharp.xml

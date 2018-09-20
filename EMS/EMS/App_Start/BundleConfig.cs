@@ -9,8 +9,16 @@ namespace EMS
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-1.10.2.js"));
-
+                        "~/Scripts/jquery-1.10.2.js",
+                        "~/Scripts/jquery.signalR-2.3.0.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery.validate.unobtrusive.js",
+                        "~/Scripts/bootstrap.validate.js",
+                        "~/Scripts/notification.js",
+                        "~/Scripts/Enquiry.js",
+                        "~/Scripts/bootstrap-datepicker.js"
+                        ));
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -19,13 +27,12 @@ namespace EMS
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/font-awesome.css",
+                      "~/Content/Style.css",
+                      "~/Content/site.css",
+                      "~/Content/bootstrap-datepicker.css"));
         }
     }
 }

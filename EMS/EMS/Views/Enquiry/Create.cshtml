@@ -4,70 +4,75 @@
     ViewBag.Title = "Create";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<form>
-    <div class="form-group">
-        <div class="col-md-12 mb-12">
-            <label for="txtFirstName">First name *</label>
-            <input type="text" class="form-control" id="txtFirstName" placeholder="First name" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 mb-12">
-            <label for="txtLastName">Last name *</label>
-            <input type="text" class="form-control" id="txtLastName" placeholder="Last name" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 mb-12">
-            <label for="txtDOB">Date of Birth(dd/MM/yyyy)</label>
-            <input type="text" class="form-control" id="txtDOB" placeholder="Date of Birth">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 mb-12">
-            <label for="txtMobile">Mobile *</label>
-            <input type="text" class="form-control" id="txtMobile" placeholder="Mobile" pattern="^\d{10}$" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12 mb-12">
-            <label for="txtEmail">Email</label>
-            <input type="email" class="form-control" id="txtEmail" placeholder="Email">
-        </div>
-    </div>
-    <button class="btn btn-primary" type="submit" id="btnSubmit">Submit Enquiry</button>
-</form>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#btnSubmit').click(function () {
-            var ob = new Object();
-            ob.FirstName = $('#txtFirstName').val();
-            ob.LastName = $('#txtLastName').val();
-            ob.DOB = $('#txtDOB').val();
-            ob.Mobile = $('#txtMobile').val();
-            ob.Class = $('#txtClass').val();
-            ob.Address = $('#txtAddress').val();
-            ob.Course = $('#txtCourse').val();
-            ob.Email = $('#txtEmail').val();
-            $.ajax({
-                type: "POST",
-                url: "/EnquiryController/Create" + ob,
-                //data: "{empid: " + empid + "}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    debugger;
-                    alert(response.Result);
-                    console.log(response.Message);
-                },
-                error: function () {
-                    alert("Error Occured")
-                }
-            });
-        });
-    });
-</script>
+<form id="frmEnquiry" class="col-md-12 mb-12">
+    <div class="col-md-6 mb-6">
+        <div class="form-group">
+            <div class="col-md-12 mb-12">
+                <label for="txtFirstName">First name *</label>
+                <input type="text" class="form-control" id="txtFirstName" placeholder="First name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12 mb-12">
+                <label for="txtLastName">Last name *</label>
+                <input type="text" class="form-control" id="txtLastName" placeholder="Last name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12 mb-12">
+                <label for="txtDOB">Date of Birth(MM/dd/yyyy)</label>
+                @*<input type="text" class="form-control" id="txtDOB" value="12/12/1990" placeholder="Date of Birth">*@
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" class="form-control" id="txtDOB">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mb-12">
+                    <label for="txtMobile">Mobile *</label>
+                    <input type="text" class="form-control" id="txtMobile" placeholder="Mobile" pattern="^\d{10}$" required>
+                </div>
+            </div>
+            @*<div class="input-group date" data-provide="datepicker">
+                <input type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>*@
+            <div class="form-group">
+                <div class="col-md-12 mb-12">
+                    <label for="txtEmail">Email</label>
+                    <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mb-12">
+                    <label for="ddlClass">Class *</label>
+                    <select id="ddlClass" class="form-control" required>
+                        <option value="">None</option>
+                        <option value="VIII">VIIIth</option>
+                        <option value="IX">IXth</option>
+                        <option value="X">Xth</option>
+                        <option value="XI">XIth</option>
+                        <option value="XII">XIIth</option>
+                        <option value="XIIP">XIIth Passed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mb-12">
+                    <label for="ddlStream">Stream *</label>
+                    <select id="ddlStream" class="form-control" required>
+                        <option value="">None</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Medical">Medical</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="button" id="btnSubmit">Submit Enquiry</button>
+        </div>
+        <div class="col-md-6 mb-6">
+        </div>
+</form>

@@ -4,18 +4,20 @@
     <EntitySetMapping Name="EnquiryDetails">
       <EntityTypeMapping TypeName="EMSModel.EnquiryDetail">
         <MappingFragment StoreEntitySet="EnquiryDetails">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Class" ColumnName="Class" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Course" ColumnName="Course" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="EntryTime" ColumnName="EntryTime" />
-          <ScalarProperty Name="ResolvedTime" ColumnName="ResolvedTime" />
           <ScalarProperty Name="Dated" ColumnName="Dated" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+          <ScalarProperty Name="ResolvedTime" ColumnName="ResolvedTime" />
+          <ScalarProperty Name="EntryTime" ColumnName="EntryTime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
