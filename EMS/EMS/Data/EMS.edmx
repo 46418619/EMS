@@ -24,6 +24,16 @@
           <Property Name="Comment" Type="varchar(max)" />
           <Property Name="Dated" Type="date" />
         </EntityType>
+        <Function Name="GetEnquiry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchString" Type="varchar" Mode="In" />
+          <Parameter Name="filterType" Type="int" Mode="In" />
+          <Parameter Name="orderBy" Type="varchar" Mode="In" />
+          <Parameter Name="orderByOrder" Type="varchar" Mode="In" />
+          <Parameter Name="recordBegin" Type="bigint" Mode="In" />
+          <Parameter Name="recordNumber" Type="bigint" Mode="In" />
+          <Parameter Name="groupBy" Type="varchar" Mode="In" />
+          <Parameter Name="groupByOrder" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="EMSModelStoreContainer">
           <EntitySet Name="EnquiryDetails" EntityType="Self.EnquiryDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -33,6 +43,16 @@
       <Schema Namespace="EMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EMSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EnquiryDetails" EntityType="EMSModel.EnquiryDetail" />
+          <FunctionImport Name="GetEnquiry" ReturnType="Collection(EMSModel.GetEnquiry_Result)">
+            <Parameter Name="searchString" Mode="In" Type="String" />
+            <Parameter Name="filterType" Mode="In" Type="Int32" />
+            <Parameter Name="orderBy" Mode="In" Type="String" />
+            <Parameter Name="orderByOrder" Mode="In" Type="String" />
+            <Parameter Name="recordBegin" Mode="In" Type="Int64" />
+            <Parameter Name="recordNumber" Mode="In" Type="Int64" />
+            <Parameter Name="groupBy" Mode="In" Type="String" />
+            <Parameter Name="groupByOrder" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="EnquiryDetail">
           <Key>
@@ -53,6 +73,19 @@
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Dated" Type="DateTime" Precision="0" />
         </EntityType>
+        <ComplexType Name="GetEnquiry_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ResolvedTime" Nullable="false" />
+          <Property Type="String" Name="Dated" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Action" Nullable="false" MaxLength="133" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -79,6 +112,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetEnquiry" FunctionName="EMSModel.Store.GetEnquiry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EMSModel.GetEnquiry_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ResolvedTime" ColumnName="ResolvedTime" />
+                <ScalarProperty Name="Dated" ColumnName="Dated" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

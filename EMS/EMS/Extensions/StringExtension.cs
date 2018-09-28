@@ -15,5 +15,24 @@ namespace EMS.Extensions
                 return obj.ToString().Trim();
         }
 
+        public static string ReplaceSpecialChar(this string Str)
+        {
+            if (string.IsNullOrEmpty(Str) == true)
+                return "";
+            Str = Str.Replace("{forwardslash}", "/")
+                    .Replace("{and}", "&")
+                    .Replace("{hash}", "#")
+                    .Replace("{plus}", "+")
+                    .Replace("{percent}", "%")
+                    .Replace("{star}", "*")
+                    .Replace("{greater}", "<")
+                    .Replace("{small}", ">")
+                    .Replace("{dot}", ".")
+                    .Replace("{colon}", ":")
+                    .Replace("{question}", "?")
+                    .Replace("{backslash}", @"\");
+            return Str;
+        }
+
     }
 }

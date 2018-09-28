@@ -12,6 +12,8 @@ namespace EMS.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EMSEntities : DbContext
     {
@@ -26,5 +28,42 @@ namespace EMS.Data
         }
     
         public virtual DbSet<EnquiryDetail> EnquiryDetails { get; set; }
+    
+        public virtual ObjectResult<GetEnquiry_Result> GetEnquiry(string searchString, Nullable<int> filterType, string orderBy, string orderByOrder, Nullable<long> recordBegin, Nullable<long> recordNumber, string groupBy, string groupByOrder)
+        {
+            var searchStringParameter = searchString != null ?
+                new ObjectParameter("searchString", searchString) :
+                new ObjectParameter("searchString", typeof(string));
+    
+            var filterTypeParameter = filterType.HasValue ?
+                new ObjectParameter("filterType", filterType) :
+                new ObjectParameter("filterType", typeof(int));
+    
+            var orderByParameter = orderBy != null ?
+                new ObjectParameter("orderBy", orderBy) :
+                new ObjectParameter("orderBy", typeof(string));
+    
+            var orderByOrderParameter = orderByOrder != null ?
+                new ObjectParameter("orderByOrder", orderByOrder) :
+                new ObjectParameter("orderByOrder", typeof(string));
+    
+            var recordBeginParameter = recordBegin.HasValue ?
+                new ObjectParameter("recordBegin", recordBegin) :
+                new ObjectParameter("recordBegin", typeof(long));
+    
+            var recordNumberParameter = recordNumber.HasValue ?
+                new ObjectParameter("recordNumber", recordNumber) :
+                new ObjectParameter("recordNumber", typeof(long));
+    
+            var groupByParameter = groupBy != null ?
+                new ObjectParameter("groupBy", groupBy) :
+                new ObjectParameter("groupBy", typeof(string));
+    
+            var groupByOrderParameter = groupByOrder != null ?
+                new ObjectParameter("groupByOrder", groupByOrder) :
+                new ObjectParameter("groupByOrder", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEnquiry_Result>("GetEnquiry", searchStringParameter, filterTypeParameter, orderByParameter, orderByOrderParameter, recordBeginParameter, recordNumberParameter, groupByParameter, groupByOrderParameter);
+        }
     }
 }

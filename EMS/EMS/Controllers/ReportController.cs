@@ -5,13 +5,29 @@ using System.Web;
 using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using EMS.Repository;
 
 namespace EMS.Controllers
 {
     public class ReportController : Controller
     {
-        // GET: Report
+        DataRepository _dr = null;
+        public ReportController()
+        {
+            _dr = new DataRepository();
+        }
+
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult GetAllEnquiry(string searchString, string filterType, string pageSize, string pageNumber, string sortBy, string sortOrder)
+        {
+            return Json(_dr.GetAllEnquiry(searchString, filterType, pageSize, pageNumber, sortBy, sortOrder));
+        }
+
+        protected void GeneratePDF()
         {
             using (System.IO.MemoryStream memoryStream = new System.IO.MemoryStream())
             {
@@ -54,13 +70,8 @@ namespace EMS.Controllers
                 Response.Close();
                 //return memoryStream;
                 //return View();
-                return File(memoryStream, "application/pdf", Server.UrlEncode("abc"));
+                //  return File(memoryStream, "application/pdf", Server.UrlEncode("abc"));
             }
-        }
-        protected void GeneratePDF()
-        {
-            
-            
         }
     }
 }

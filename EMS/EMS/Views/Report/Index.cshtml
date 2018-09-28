@@ -1,7 +1,38 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Daily Enquiry Report</h2>
+<form id="frmEnquiry" class="col-md-12 mb-12">
 
+    <div class="form-group">
+        <div class="col-md-12 mb-12">
+            <div class="col-md-4 mb-4">
+                <label for="txtFromDate">From Date : </label>
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" class="form-control" id="txtFromDate" setDate="new Date()">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 mb-2">
+            </div>
+            <div class="col-md-4 mb-4">
+                <label for="txtToDate">To Date : </label>
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" class="form-control" id="txtToDate">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtFromDate').datepicker("setDate", new Date());
+        $('#txtToDate').datepicker("setDate", new Date());
+    });
+</script>

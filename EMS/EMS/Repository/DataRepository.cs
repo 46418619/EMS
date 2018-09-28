@@ -5,6 +5,7 @@ using System.Web;
 using EMS.Data;
 using EMS.Models;
 using EMS.Extensions;
+using System.Web.Script.Serialization;
 
 namespace EMS.Repository
 {
@@ -50,17 +51,42 @@ namespace EMS.Repository
                     ResolvedTime = x.ResolvedTime
                 }).ToList();
         }
-        public OutStandingEnquiryViewModel ResolveEnquiry(int id,string comment)
+        public OutStandingEnquiryViewModel ResolveEnquiry(int id, string comment)
         {
             var ob = _ety.EnquiryDetails.FirstOrDefault(x => x.ID == id);
             ob.ResolvedTime = DateTime.Now;
             ob.Resolved = true;
             ob.Comment = comment.ToStringValue();
             _ety.SaveChanges();
-            return new OutStandingEnquiryViewModel { 
+            return new OutStandingEnquiryViewModel
+            {
                 Name = ob.FirstName.ToStringValue() + " " + ob.LastName.ToStringValue(),
-                ID=ob.ID
+                ID = ob.ID
             };
+        }
+
+        public string GetAllEnquiry(string searchString, string filterType, string pageSize, string pageNumber, string sortBy, string sortOrder)
+        {
+            var js = new JavaScriptSerializer();
+
+            js.MaxJsonLength = 2147483647;
+            if (searchString == "-1")
+            { searchString = ""; }
+
+            searchString = searchString.ReplaceSpecialChar();
+
+
+            var _mainData = _ety.GetEnquiry(searchString, 0, sortBy, sortOrder, (Convert.ToInt32(pageNumber) - 1) * Convert.ToInt32(pageSize), Convert.ToInt32(pageSize), "", "").ToList();
+            var _totalCount = _mainData.Count() == 0 ? 0 : _mainData.First().TotalCount;
+
+            return js.Serialize(new
+                                {
+                                    page = pageNumber,
+                                    records = _totalCount.Value,
+                                    total = System.Convert.ToInt64(_totalCount) % System.Convert.ToInt64(pageSize) == 0 ? System.Convert.ToInt32(System.Convert.ToInt64(_totalCount) / Double.Parse(pageSize)) : System.Convert.ToInt32(Math.Ceiling(System.Convert.ToInt64(_totalCount) / Double.Parse(pageSize))),
+                                    rows = _mainData
+                                });
+
         }
     }
 }
